@@ -95,24 +95,44 @@ export default function TourModal({ tour, isOpen, onClose }: TourModalProps) {
 
   const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!bookingData.acceptTerms) {
       alert('Please accept the Terms & Conditions to proceed.');
       return;
     }
 
     setIsSubmitting(true);
-    
-    // Simulate API call
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSubmitSuccess(true);
-      
-      // Here you would typically send the data to your backend
-      console.log('Booking submitted:', {
-        tour: tour?.title,
-        ...bookingData
+      // Prepare payload for Web3Forms
+      const formPayload = {
+        access_key: 'd711b518-52f5-40e7-9f6b-b2d7509622b6',
+        name: bookingData.fullName,
+        email: bookingData.email,
+        phone: bookingData.phone,
+        travelers: bookingData.travelers,
+        start_date: bookingData.startDate,
+        end_date: bookingData.endDate,
+        message: bookingData.message,
+        tour: tour?.title
+      };
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formPayload)
       });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitSuccess(true);
+      } else {
+        alert('Failed to submit booking. Please try again later.');
+        console.error('Web3Forms error:', data);
+      }
     } catch (error) {
+      alert('An error occurred while submitting the booking.');
       console.error('Booking submission failed:', error);
     } finally {
       setIsSubmitting(false);

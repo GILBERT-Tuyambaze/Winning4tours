@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -10,37 +11,37 @@ import { MapPin, Clock, Users, Star, Camera, Mountain, TreePine, Waves, Bird, Cr
 const countries = [
   {
     name: 'Rwanda',
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop',
+    image: 'https://cdn.pixabay.com/photo/2020/09/13/16/16/terraces-5568679_960_720.jpg',
     description: 'Discover the "Land of a Thousand Hills" with scenic landscapes, gorilla trekking in Volcanoes National Park, and one of Africa\'s cleanest and safest capitals—Kigali.',
     highlights: ['Mountain Gorillas', 'Volcanoes National Park', 'Kigali City', 'Lake Kivu']
   },
   {
     name: 'Uganda',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&h=600&fit=crop',
+    image: 'https://cdn.pixabay.com/photo/2020/04/09/19/44/namibia-5022857_1280.jpg',
     description: 'A hidden gem with lush rainforests, source of the Nile River, and the Big Five in Queen Elizabeth & Murchison Falls National Parks. Uganda offers raw, untouched nature.',
     highlights: ['Source of the Nile', 'Bwindi Impenetrable Forest', 'Queen Elizabeth NP', 'Murchison Falls']
   },
   {
     name: 'Kenya',
-    image: 'https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=800&h=600&fit=crop',
+    image: 'https://cdn.pixabay.com/photo/2019/02/14/06/57/wildebeest-migration-3995945_1280.jpg',
     description: 'Famous for the Great Migration in Maasai Mara, stunning savannahs, vibrant cities, and beach escapes in Mombasa and Diani. A perfect safari-meets-coastline destination.',
     highlights: ['Great Migration', 'Maasai Mara', 'Mount Kenya', 'Coastal Beaches']
   },
   {
     name: 'Tanzania',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&h=600&fit=crop',
+    image: 'https://cdn.pixabay.com/photo/2017/08/24/12/26/hammock-2676647_1280.jpg',
     description: 'Home to Mount Kilimanjaro, Serengeti\'s wildlife, and Zanzibar\'s turquoise beaches. Tanzania offers unmatched beauty for both adventure and relaxation seekers.',
     highlights: ['Mount Kilimanjaro', 'Serengeti National Park', 'Zanzibar', 'Ngorongoro Crater']
   },
   {
     name: 'Burundi',
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop',
+    image: 'https://cdn.pixabay.com/photo/2021/03/04/07/31/mountains-6067150_1280.jpg',
     description: 'A culturally rich country with warm people, traditional drumming, Lake Tanganyika, and picturesque hills. Ideal for off-the-beaten-path explorers.',
     highlights: ['Lake Tanganyika', 'Traditional Culture', 'Rolling Hills', 'Authentic Experiences']
   },
   {
     name: 'DR Congo',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&h=600&fit=crop',
+    image: 'https://cdn.pixabay.com/photo/2020/02/09/19/06/falls-4834262_1280.jpg',
     description: 'Venture into Virunga National Park for rare gorilla encounters, hike active volcanoes, and explore Congo\'s deep jungles. A destination for the bold and curious.',
     highlights: ['Virunga National Park', 'Active Volcanoes', 'Dense Jungles', 'Adventure Tourism']
   }
@@ -50,7 +51,7 @@ const excitingSpots = [
   {
     name: 'Volcanoes National Park',
     location: 'Rwanda',
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop',
+    image: 'https://cdn.pixabay.com/photo/2019/03/25/03/30/volcano-4079279_1280.jpg',
     description: 'Home to rare mountain gorillas, lush rainforests, and stunning volcano peaks. A must-visit for adventurous eco-tourists in Rwanda.',
     icon: Mountain,
     activities: ['Gorilla Trekking', 'Volcano Hiking', 'Golden Monkey Tracking', 'Cultural Tours']
@@ -58,7 +59,7 @@ const excitingSpots = [
   {
     name: 'Bwindi Impenetrable NP',
     location: 'Uganda',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&h=600&fit=crop',
+    image: 'https://cdn.pixabay.com/photo/2014/05/27/08/05/bwindi-impenetrable-forest-355180_1280.jpg',
     description: 'Uganda\'s top gorilla trekking destination. Dense jungles, misty hills, and unforgettable wildlife close encounters.',
     icon: TreePine,
     activities: ['Gorilla Trekking', 'Bird Watching', 'Nature Walks', 'Community Tours']
@@ -66,7 +67,7 @@ const excitingSpots = [
   {
     name: 'Masai Mara',
     location: 'Kenya',
-    image: 'https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=800&h=600&fit=crop',
+    image: 'https://cdn.pixabay.com/photo/2017/06/03/21/26/giraffe-2369813_1280.jpg',
     description: 'Kenya\'s iconic safari park, known for the Great Migration and big cat sightings. A dreamland for wildlife lovers.',
     icon: Crown,
     activities: ['Game Drives', 'Hot Air Balloon', 'Cultural Visits', 'Photography']
@@ -74,7 +75,7 @@ const excitingSpots = [
   {
     name: 'Akagera National Park',
     location: 'Rwanda',
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop',
+    image: 'https://static1.squarespace.com/static/58b3f7f5e58c62561f62dc27/t/58c265f7893fc02bf07a2a90/1489135106554/?format=1000w',
     description: 'Rwanda\'s savannah park featuring lions, elephants, and lake cruises. Perfect for a classic safari with a twist.',
     icon: Bird,
     activities: ['Game Drives', 'Boat Cruises', 'Fishing', 'Bird Watching']
@@ -82,7 +83,7 @@ const excitingSpots = [
   {
     name: 'Murchison Falls NP',
     location: 'Uganda',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&h=600&fit=crop',
+    image: 'https://cdn.pixabay.com/photo/2013/10/30/08/35/falls-202827_1280.jpg',
     description: 'Uganda\'s largest park, home to the mighty waterfall, boat cruises on the Nile, and abundant wildlife including giraffes and hippos.',
     icon: Waves,
     activities: ['Waterfall Viewing', 'Nile Cruises', 'Game Drives', 'Fishing']
@@ -90,7 +91,7 @@ const excitingSpots = [
   {
     name: 'Zanzibar',
     location: 'Tanzania',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&h=600&fit=crop',
+    image: 'https://cdn.pixabay.com/photo/2020/05/05/23/08/africa-5135407_1280.jpg',
     description: 'Pristine beaches, spice tours, and Stone Town\'s historic charm make Zanzibar the perfect tropical getaway.',
     icon: Waves,
     activities: ['Beach Relaxation', 'Spice Tours', 'Snorkeling', 'Cultural Tours']
@@ -102,8 +103,8 @@ const ugandaSafaris = [
     id: '3-days-murchison',
     title: '3 DAYS: MURCHISON FALLS NATIONAL PARK',
     duration: '3 Days / 2 Nights',
-    price: 'From $850',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&h=600&fit=crop',
+    price: 'From ..',
+    image: 'https://cdn.pixabay.com/photo/2021/06/20/15/46/rocks-6351404_1280.jpg',
     highlights: ['Murchison Falls', 'Nile Boat Cruise', 'Game Drives', 'Top of the Falls Hike'],
     itinerary: [
       {
@@ -127,8 +128,8 @@ const ugandaSafaris = [
     id: '3-days-queen-elizabeth',
     title: '3 DAYS: QUEEN ELIZABETH NATIONAL PARK',
     duration: '3 Days / 2 Nights',
-    price: 'From $750',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&h=600&fit=crop',
+    price: 'From ..',
+    image: 'https://cdn.pixabay.com/photo/2019/10/01/11/54/elephants-4518008_1280.jpg',
     highlights: ['Tree Climbing Lions', 'Kazinga Channel', 'Crater Lakes', 'Chimp Tracking'],
     itinerary: [
       {
@@ -152,8 +153,8 @@ const ugandaSafaris = [
     id: '8-days-uganda-classic',
     title: '8 DAY: UGANDA CLASSIC SAFARI',
     duration: '8 Days / 7 Nights',
-    price: 'From $2,850',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&h=600&fit=crop',
+    price: 'From ..',
+    image: 'https://cdn.pixabay.com/photo/2020/07/03/06/10/nile-5365318_1280.jpg',
     highlights: ['Gorilla Trekking', 'Chimpanzee Tracking', 'Big 5 Safari', 'Cultural Experiences'],
     itinerary: [
       {
@@ -205,8 +206,8 @@ const kenyaSafaris = [
     id: '8-days-big5-kenya',
     title: '8 DAYS: BIG 5 SAFARI (KENYA)',
     duration: '8 Days / 7 Nights',
-    price: 'From $3,200',
-    image: 'https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=800&h=600&fit=crop',
+    price: 'From ..',
+    image: 'https://cdn.pixabay.com/photo/2019/09/10/04/28/lioness-4465223_1280.jpg',
     highlights: ['Great Migration', 'Big 5 Animals', 'Masai Culture', 'Scenic Landscapes'],
     itinerary: [
       {
@@ -562,13 +563,15 @@ export default function Destinations() {
             Let us craft your perfect safari adventure across the most spectacular destinations in East Africa
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="text-lg px-8 py-4 bg-white text-safari-green hover:bg-safari-green/5 dark:bg-gray-900 dark:text-warm-sand">
-              <Users className="w-5 h-5 mr-2" />
+            <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-white text-safari-green hover:bg-gray-300 dark:hover:bg-gray-100 dark:hover:text-gray-900">
+             <Link to="/explore-tours" className="flex items-center"><Users className="w-5 h-5 mr-2" />
               Plan My Safari
+             </Link>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-gray-800 dark:hover:bg-gray-100 dark:hover:text-gray-900">
-              <MapPin className="w-5 h-5 mr-2" />
+            <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-white text-safari-green hover:bg-gray-300  dark:hover:bg-gray-100 dark:hover:text-gray-900">
+             <Link to="/explore-tours" className="flex items-center"> <MapPin className="w-5 h-5 mr-2" />
               View All Tours
+             </Link>
             </Button>
           </div>
         </div>

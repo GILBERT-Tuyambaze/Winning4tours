@@ -203,7 +203,7 @@ export default function Layout({ children }: LayoutProps) {
           </div>
 
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-            <p>&copy; 2024 Winning4Tours. All rights reserved.</p>
+            <p>&copy; 2025 Winning4Tours. All rights reserved. || <a href="https://tuyambaze-gilbert.vercel.app" className="text-gray-300 hover:text-orange-500" target="_blank" rel="noopener noreferrer">developed by Gilbert TUYAMBAZE, click here to visit me too </a></p>
           </div>
         </div>
       </footer>

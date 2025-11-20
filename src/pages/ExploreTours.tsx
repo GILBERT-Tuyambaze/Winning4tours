@@ -69,7 +69,7 @@ export default function ExploreTours() {
         </section>
 
         {/* Call to Action */}
-        <section className="bg-warm-sand/10 dark:bg-gray-800 py-16">
+        <section className="bg-warm-sand/50 dark:bg-gray-600 py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl font-bold text-safari-green dark:text-warm-sand mb-4">
               Can't Find What You're Looking For?
